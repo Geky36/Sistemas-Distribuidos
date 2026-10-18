@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Impresión Concurrente - Semáforos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>🖨️ Centro de Impresión Concurrente</h1>
+            <p>Sincronización de Procesos mediante Semáforos de Paso (Dijkstra)</p>
+        </header>
+
+        <!-- Panel de Control e Inputs -->
+        <section class="panel-control">
+            <div class="input-group">
+                <label for="numDocs">Número de Documentos (N):</label>
+                <input type="number" id="numDocs" value="3" min="1" max="10">
+            </div>
+            <div class="button-group">
+                <button id="btnIniciar" class="btn btn-primary">▶ Iniciar Simulación</button>
+                <button id="btnLimpiar" class="btn btn-secondary">🔄 Reiniciar</button>
+            </div>
+        </section>
+
+        <!-- Métricas globales del sistema -->
+        <section class="panel-metricas">
+            <div class="card-metrica">
+                <h3>Documento en Diseño</h3>
+                <span id="metricDiseno" class="valor-metrica">0</span>
+            </div>
+            <div class="card-metrica">
+                <h3>Documento en Revisión</h3>
+                <span id="metricRevision" class="valor-metrica">0</span>
+            </div>
+            <div class="card-metrica">
+                <h3>Total Impresos</h3>
+                <span id="metricImpresos" class="valor-metrica">0</span>
+            </div>
+            <div class="card-metrica">
+                <h3>Estado General</h3>
+                <span id="metricEstado" class="badge badge-inactivo">INACTIVO</span>
+            </div>
+        </section>
+
+        <!-- Visualización del Pipeline -->
+        <section class="pipeline-container">
+            <div class="etapa" id="etapaDiseno">
+                <div class="etapa-header">🎨 1. Etapa de Diseño</div>
+                <div class="semaforo-indicador">Semáforo: <span id="semDiseno">1</span></div>
+                <div class="etapa-contenido" id="slotDiseno">
+                    <span class="placeholder">Esperando documento...</span>
+                </div>
+            </div>
+
+            <div class="flecha-flujo">➔</div>
+
+            <div class="etapa" id="etapaRevision">
+                <div class="etapa-header">🔍 2. Etapa de Revisión</div>
+                <div class="semaforo-indicador">Semáforo: <span id="semRevision">0</span></div>
+                <div class="etapa-contenido" id="slotRevision">
+                    <span class="placeholder">Esperando documento...</span>
+                </div>
+            </div>
+
+            <div class="flecha-flujo">➔</div>
+
+            <div class="etapa" id="etapaImpresion">
+                <div class="etapa-header">🖨️ 3. Etapa de Impresión</div>
+                <div class="semaforo-indicador">Semáforo: <span id="semImpresion">0</span></div>
+                <div class="etapa-contenido" id="slotImpresion">
+                    <span class="placeholder">Esperando documento...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bitácora de Eventos -->
+        <section class="bitacora-container">
+            <h2>📜 Bitácora de Operaciones Concurrente (wait / signal)</h2>
+            <div class="bitacora-box" id="bitacoraLog">
+                <div class="log-entry system">[SISTEMA]: Sistema listo para iniciar.</div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
